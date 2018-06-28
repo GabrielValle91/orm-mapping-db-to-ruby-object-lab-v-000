@@ -60,6 +60,7 @@ class Student
     sql = <<-SQL
       SELECT name FROM students
       WHERE name = ?
+      LIMIT 1
     SQL
     DB[:conn].execute(sql,name).collect do |student|
       self.new_from_db(student)
