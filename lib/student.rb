@@ -25,6 +25,13 @@ class Student
   def self.find_by_name(name)
     # find the student in the database given a name
     # return a new instance of the Student class
+    sql = <<-SQL
+      SELECT name FROM students
+      WHERE name = ?
+    SQL
+    DB[:conn].execute(sql,name).collect do |student|
+      self.new_from_db(student)
+    end.first
   end
 
   def save
