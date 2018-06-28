@@ -64,7 +64,6 @@ class Student
       LIMIT 1
     SQL
     DB[:conn].execute(sql, name).collect do |student|
-      binding.pry
       self.new_from_db(student)
     end.first
   end
